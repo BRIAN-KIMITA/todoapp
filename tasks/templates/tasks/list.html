@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .input ::placeholder {
+        color: #d3d3d3;
+    }
+    .submit{
+        background-color: #63A3EB ;
+    }
+    .center-column{
+        width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+
+    }
+    .item-row{
+        background-color: #904abd;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+    }
+    .btn-danger{
+        background-color: #ffae19;
+        border-color: #e59400;
+    }
+</style>
+</head>
+<body>
+
+<div class="center-column">
+    <form method="POST" action="/">
+        {% csrf_token %}
+        {{ form.title }}
+        <input type="submit" name="create task">
+    </form>
+<div class="todo-list">
+    {% for task in tasks %}
+        <div class="item-row">
+            <a  class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a>
+              <a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">Delete</a>
+            {% if task.complete == True %}
+                 <strike>{{ task }}</strike>
+                {% else %}
+                <span>{{ task }}</span>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+</div>
+</div>
+</body>
+</html>
+{#{% block content %}#}
+{#  <h2>Task List</h2>#}
+{#  <ul>#}
+{#    {% for task in tasks %}#}
+{#      <li>#}
+{#        {{ task.title }} - Priority: {{ task.priority }} - {% if task.completed %}Completed{% else %}Incomplete{% endif %}#}
+{#      </li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{#{% endblock %}#}
+<!-- templates/tasks/list.html -->
+
+
+{#{% block content %}#}
+{#  <h2>Task List</h2>#}
+{#  <ul>#}
+{#    {% for task in tasks %}#}
+{#      <li>#}
+{#        <strong>{{ task.title }}</strong>#}
+{#        <p>Description: {{ task.description }}</p>#}
+{#        <p>Priority: {{ task.priority }}</p>#}
+{#        <p>Due Date: {% if task.due_date %}{{ task.due_date }}{% else %}No due date{% endif %}</p>#}
+{#        <p>Status: {% if task.completed %}Completed{% else %}Incomplete{% endif %}</p>#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{#{% endblock %}#}
+        <!-- Update Task Button -->
+       <!-- tasks/templates/tasks/list.html -->
+{#<a href="{% url 'update_task' task.id %}">Update</a>#}
+
+
+        <!-- Complete Task Button -->
+{#        {% if not task.completed %}#}
+{#          <form method="post" action="{% url 'complete_task' task.id %}" style="display: inline;">#}
+{#            {% csrf_token %}#}
+{#            <button type="submit">Complete</button>#}
+{#          </form>#}
+{#        {% endif %}#}
+
+        <!-- Delete Task Button -->
+{#        <form method="post" action="{% url 'delete_task' task.id %}" style="display: inline;">#}
+{#          {% csrf_token %}#}
+{#          <button type="submit">Delete</button>#}
+{#        </form>#}
+{#      </li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
+{#{% endblock %}#}
